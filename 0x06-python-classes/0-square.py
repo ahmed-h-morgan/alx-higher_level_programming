@@ -4,6 +4,7 @@
     The Square model
 """
 
+
 class Square:
     """
     this is an empty square class
