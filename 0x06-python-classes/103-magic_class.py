@@ -1,13 +1,20 @@
 #!/usr/bin/python3
 import math
 """
-    this is the magic class
+    Define a MagicClass that mimics the given bytecode behavior
 """
 
 
 class MagicClass:
     """
-    A class that represents a circle with radius-based calculations.
+    A circle-like class with radius-based geometry calculations.
+
+    This class provides methods to calculate the area and circumference
+    of a circle based on its radius, following the exact behavior
+    shown in the provided bytecode disassembly.
+
+    Attributes:
+        __radius (int/float): The radius of the circle (private).
     """
     
     def __init__(self, radius=0):
