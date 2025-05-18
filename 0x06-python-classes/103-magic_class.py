@@ -1,9 +1,29 @@
 #!/usr/bin/python3
-import math
 """
-    Define a MagicClass that mimics the given bytecode behavior
+Circle Geometry Model
+
+This module implements a simplified circle geometry model based on the
+bytecode analysis of a specific implementation. It provides a class called
+`MagicClass` which mimics the behavior observed in the bytecode.
+
+The model includes two main properties of a circle:
+1. Area: The interior space enclosed within the circle's boundary.
+2. Circumference: The distance around the circle's edge.
+
+The implementation uses a private attribute `__radius` to store the circle's
+radius, ensuring encapsulation of the internal state.
+
+Usage:
+    To create a circle instance and perform calculations:
+    >>> circle = MagicClass(5)  # Create a circle with radius 5
+    >>> print(circle.area())   # Calculate and print the area
+    >>> print(circle.circumference())  # Calculate and print the circumference
+
+Note: This model does not handle negative radii or non-numeric inputs.
 """
 
+
+import math
 
 class MagicClass:
     """
@@ -16,11 +36,11 @@ class MagicClass:
     Attributes:
         __radius (int/float): The radius of the circle (private).
     """
-    
+
     def __init__(self, radius=0):
         """
         Initialize MagicClass with a radius.
-        
+
         Args:
             radius (int/float): Radius of the circle (default 0)
         
