@@ -21,7 +21,7 @@ class Square:
             raise TypeError("position must be a tuple of 2 positive integers")
         elif not map(lambda x: True if (x > 0) else False, position):
             raise TypeError("position must be a tuple of 2 positive integers")
-        elif not map(lambda x: True if (isinstance(x, int)) else False, value):
+        elif not map(lambda x: True if (isinstance(x, int)) else False, position):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = position
 
