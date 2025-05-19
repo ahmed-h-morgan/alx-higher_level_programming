@@ -60,9 +60,11 @@ class Rectangle:
             return (self.__width + self.__height) * 2
 
     def __str__(self):
+        # Use instance-specific print_symbol if it exists, else use class variable
+        symbol = getattr(self, 'print_symbol', Rectangle.print_symbol)
         text = ""
         for x in range(self.__height):
-            text += Rectangle.print_symbol * self.__width + "\n"
+            text += str(symbol) * self.__width + "\n"
         return text.rstrip()
 
     def __repr__(self):
