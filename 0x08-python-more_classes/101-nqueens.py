@@ -9,20 +9,26 @@ def is_safe(board, row, col, N):
             return False
 
     # Check upper diagonal on the left side
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+    i, j = row, col
+    while i >= 0 and j >= 0:
         if board[i][j] == 1:
             return False
+        i -= 1
+        j -= 1
 
     # Check lower diagonal on the left side
-    for i, j in zip(range(row, N, 1), range(col, -1, -1)):
+    i, j = row, col
+    while i < N and j >= 0:
         if board[i][j] == 1:
             return False
+        i += 1
+        j -= 1
 
     return True
 
 def solve_nqueens_util(board, col, N, solutions):
     """Use backtracking to find all solutions."""
-    if col >= N:
+    if col == N:
         solution = []
         for i in range(N):
             for j in range(N):
