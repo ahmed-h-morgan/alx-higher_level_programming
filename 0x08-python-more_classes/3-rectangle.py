@@ -59,4 +59,4 @@ class Rectangle:
         for x in range(self.__height):
 
             text += '#' * self.__width + "\n"
-        return text
+        return text.rstrip()
