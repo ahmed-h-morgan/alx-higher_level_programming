@@ -2,8 +2,10 @@
 """text indentation module"""
 
 
-def text_indentation(text=""):
+def text_indentation(text):
     """text indentation func"""
+    if not text:
+        raise TypeError("text_indentation() missing 1 required positional argument: 'text'")
     if type(text) is not str:
         raise TypeError("text must be a string")
     after_new_line = False
