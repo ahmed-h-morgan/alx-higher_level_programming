@@ -38,3 +38,6 @@ TypeError: add_integer() missing 1 required positional argument: 'a'
 ####### Only float input ######
 >>> add_integer(1.6, 3)
 4
+
+>>> add_integer(1.5, -3)
+-2
