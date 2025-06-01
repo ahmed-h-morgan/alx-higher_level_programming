@@ -1,2 +1,15 @@
 >>> matrix_mul = __import__('100-matrix_mul').matrix_mul
 
+###### One paramenter is not a list ######
+>>> matrix_mul("hello", [1, 2, 3])
+Traceback (most recent call last):
+TypeError: m_a must be a list
+
+>>> matrix_mul([1, 2, 3], "hello")
+Traceback (most recent call last):
+TypeError: m_b must be a list
+
+###### One element in a list is nor INT ######
+>>> matrix_mul([1, 2, 3], [7, '3', 9] )
+Traceback (most recent call last):
+TypeError: m_a must be a list of lists
