@@ -44,3 +44,12 @@ ValueError: m_a can't be empty
 >>> matrix_mul([[1, 18], [3, 11]], [[]] )
 Traceback (most recent call last):
 ValueError: m_b can't be empty
+
+###### Not same size ######
+>>> matrix_mul([[1, 18], [3, 11]], [[7, 5], [9, 20, 30]] )
+Traceback (most recent call last):
+TypeError: each row of m_b must be of the same size
+
+>>> matrix_mul([[1, 18], [3, 11, 25]], [[7, 5], [9, 20]] )
+Traceback (most recent call last):
+TypeError: each row of m_a must be of the same size
