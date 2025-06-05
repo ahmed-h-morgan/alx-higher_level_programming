@@ -7,7 +7,7 @@ Create Singly linked list using Python
 class Node():
     """
     A class to create new node
-    
+
     """
     def __init__(self, data, next_node=None):
         self.data = data
@@ -38,7 +38,7 @@ class Node():
 
 class SinglyLinkedList:
     """
-    A class to initialize the linked list 
+    A class to initialize the linked list
     """
 
     def __init__(self):
