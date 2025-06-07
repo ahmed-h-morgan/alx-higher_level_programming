@@ -24,7 +24,7 @@
 ###### Sort negative numbers ######
 >>> MyList = __import__('1-my_list').MyList
 >>> my_list = MyList()
->>> my_list.append(-4)
->>> my_list.append(-1)
+>>> my_list.append(-22)
+>>> my_list.append(-7)
 >>> my_list.print_sorted()
-[-4, -1]
+[-22, -7]
