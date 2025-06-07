@@ -1,0 +1,17 @@
+>>> MyList = __import__('1-my_list').MyList
+
+>>> my_list = MyList()
+
+###### sort string with numbers ######
+
+>>> my_list.append(22)
+>>> my_list.append('5')
+Traceback (most recent call last):
+TypeError: '<' not supported between instances of 'int' and 'str'
+
+###### sort negative numbers ######
+
+>>> my_list.append(-22)
+>>> my_list.append(-15)
+>>> my_list.append(-3)
+[-22, -15, -3]
