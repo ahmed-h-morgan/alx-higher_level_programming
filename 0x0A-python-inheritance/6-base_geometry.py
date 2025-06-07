@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-5. Geometry module
+6. Improve Geometry
 """
 
 
@@ -8,4 +8,5 @@ class BaseGeometry:
     """
     an empty class BaseGeometry.
     """
-    pass
+    def area(self):
+        raise Exception("area() is not implemented")
