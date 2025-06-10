@@ -10,7 +10,7 @@ def read_file(filename=""):
     """
     try:
         with open(filename, 'r', encoding="UTF8") as file:
-            content = file.read()
-            print(content)
+            for line in file:
+                print(line, end='')
     except Exception as e:
         print(e)
