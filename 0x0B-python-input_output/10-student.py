@@ -28,7 +28,8 @@ class Student:
         if len(attrs) == 0:
             return {}
 
-        if not isinstance(attrs, list) or not all(isinstance(attr, str) for attr in attrs):
+        if not isinstance(attrs, list) or not\
+           all(isinstance(attr, str) for attr in attrs):
             return self.__dict__
         # for attribute in attrs:
         #     if not isinstance(attribute, str):
