@@ -22,8 +22,11 @@ class Student:
         """
         result_dic = {}
 
-        if not attrs or len(attrs) is 0:
+        if not attrs:
             return self.__dict__
+
+        if len(attrs) == 0:
+            return {}
 
         for attribute in attrs:
             if not isinstance(attribute, str):
