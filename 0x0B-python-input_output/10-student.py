@@ -22,15 +22,17 @@ class Student:
         """
         result_dic = {}
 
-        if not attrs:
+        if attrs is None:
             return self.__dict__
 
         if len(attrs) == 0:
             return {}
 
-        for attribute in attrs:
-            if not isinstance(attribute, str):
-                return self.__dict__
+        if not isinstance(attrs, list) or not all(isinstance(attr, str) for attr in attrs):
+            return self.__dict__
+        # for attribute in attrs:
+        #     if not isinstance(attribute, str):
+        #         return self.__dict__
 
         for attribute in attrs:
             for keys, values in self.__dict__.items():
