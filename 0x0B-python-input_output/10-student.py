@@ -22,7 +22,7 @@ class Student:
         """
         result_dic = {}
 
-        if not attrs or len(attrs) == 0:
+        if not attrs or len(attrs) is 0:
             return self.__dict__
 
         for attribute in attrs:
