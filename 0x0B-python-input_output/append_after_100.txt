@@ -1,12 +1,15 @@
-At  ALX,
+At School,
 Python is really important,
+"C is fun!"
 But it can be very hard if:
 - You don't get all Pythonic tricks
-- You don't have strong C knowledge.
-At  ALX,
+"C is fun!"
+- You don't have strong C knowledge.At School,
 "C is fun!"
  is really important,
+"C is fun!"
 But it can be very hard if:
 - You don't get all "C is fun!"
 ic tricks
+"C is fun!"
 - You don't have strong C knowledge.
