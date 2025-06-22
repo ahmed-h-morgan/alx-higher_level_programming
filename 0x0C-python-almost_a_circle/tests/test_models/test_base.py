@@ -7,6 +7,8 @@ from models.base import Base
 
 class TestBase(unittest.TestCase):
     """
-    
+    test base class
     """
-    pass
+    def test_create_first_object(self):
+        first_object = Base()
+        self.assertEqual(first_object.__nb_objects, 1)
