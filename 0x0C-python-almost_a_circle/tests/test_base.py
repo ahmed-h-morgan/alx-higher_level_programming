@@ -11,4 +11,4 @@ class TestBase(unittest.TestCase):
     """
     def test_create_first_object(self):
         first_object = Base()
-        self.assertEqual(first_object.__nb_objects, 1)
+        self.assertEqual(Base._Base__nb_objects, 1)
