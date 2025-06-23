@@ -16,3 +16,7 @@ class TestBase(unittest.TestCase):
     def test_new_id(self):
         new_id = Base(25)
         self.assertEqual(new_id.id, 25)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
