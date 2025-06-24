@@ -99,16 +99,24 @@ class Rectangle(Base):
         """
         return self.width * self.height
 
-    def display(self):
-        """
-        draw rectangle shape on terminal
-        """
-        for h in range(self.height):
-            row = ""
-            for w in range(self.width):
-                row += "#"
-            print(row)
+    # def display(self):
+    #     """
+    #     draw rectangle shape on terminal
+    #     """
+    #     for h in range(self.height):
+    #         row = ""
+    #         for w in range(self.width):
+    #             row += "#"
+    #         print(row)
 
     def __str__(self):
         return f"[Rectangle] " + \
             f"({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+
+    def display(self):
+        """display symbole"""
+        for vertical in range(self.y):
+            print()
+        for symbole in range(self.height):
+            print(" " * self.x, end="")
+            print("#" * self.width)
