@@ -58,3 +58,7 @@ class TestRectangle(unittest.TestCase):
     def test_area(self):
         rect = Rectangle(6, 7)
         self.assertEqual(rect.area(), 42)
+
+    def test_str(self):
+        rect = Rectangle(7, 14, 3, 9,30)
+        self.assertMultiLineEqual(rect.__str__(), "[Rectangle] (30) 3/9 - 7/14")
