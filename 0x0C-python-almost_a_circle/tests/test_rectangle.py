@@ -10,11 +10,12 @@ class TestRectangle(unittest.TestCase):
     Test Rectangle class
     """
     def test_only_width(self):
-        with self.assertRaises(TypeError):
-            Rectangle(5)
+        self.assertRaises(TypeError, Rectangle, 5)
 
     def test_positive_width_and_height(self):
-        Rectangle(10,4)
+        rect = Rectangle(7,14)
+        self.assertEqual(rect.width,7)
+        self.assertEqual(rect.height, 14)
 
     def test_negative_width(self):
         pass
