@@ -95,6 +95,9 @@ class Rectangle(Base):
         return self.width * self.height
     
     def display(self):
+        """
+        draw rectangle shape on terminal
+        """
         for h in range(self.height):
             row = ""
             for w in range(self.width):
