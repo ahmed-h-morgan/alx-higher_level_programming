@@ -98,7 +98,7 @@ class Rectangle(Base):
             int: total area of rectangle
         """
         return self.width * self.height
-    
+
     def display(self):
         """
         draw rectangle shape on terminal
