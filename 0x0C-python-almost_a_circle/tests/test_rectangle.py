@@ -48,8 +48,9 @@ class TestRectangle(unittest.TestCase):
         self.assertRaisesRegex(TypeError, "y must be an integer", Rectangle, 12, 16, 3, "5")
 
     def test_all_positive(self):
-        rect = Rectangle(7, 14, 3, 9)
+        rect = Rectangle(7, 14, 3, 9,30)
         self.assertEqual(rect.width, 7)
         self.assertEqual(rect.height, 14)
         self.assertEqual(rect.x, 3)
         self.assertEqual(rect.y, 9)
+        self.assertEqual(rect.id, 30)
