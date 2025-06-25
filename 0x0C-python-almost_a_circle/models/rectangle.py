@@ -122,6 +122,7 @@ class Rectangle(Base):
             print("#" * self.width)
 
     def update(self, *args):
+        """assigns an argument to each attribute"""
         if len(args) == 1:
             self.id = args[0]
         elif len(args) == 2:
