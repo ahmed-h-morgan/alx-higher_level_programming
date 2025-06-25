@@ -4,6 +4,8 @@
 
 import unittest
 from models.rectangle import Rectangle
+from io import StringIO
+from unittest.mock import patch
 
 class TestRectangle(unittest.TestCase):
     """
@@ -62,3 +64,35 @@ class TestRectangle(unittest.TestCase):
     def test_str(self):
         rect = Rectangle(7, 14, 3, 9,30)
         self.assertMultiLineEqual(rect.__str__(), "[Rectangle] (30) 3/9 - 7/14")
+
+    def test_display_with_position(self):
+        """Test display with x and y positions"""
+        r1 = Rectangle(2, 3, 2, 2)
+        expected_output = "\n\n  ##\n  ##\n  ##\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            r1.display()
+            self.assertEqual(fake_out.getvalue(), expected_output)
+
+    def test_display_with_x_only(self):
+        """Test display with x position only (y=0)"""
+        r2 = Rectangle(3, 2, 1, 0)
+        expected_output = " ###\n ###\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            r2.display()
+            self.assertEqual(fake_out.getvalue(), expected_output)
+
+    def test_display_no_position(self):
+        """Test display with no x and y positions (x=0, y=0)"""
+        r3 = Rectangle(4, 2)
+        expected_output = "####\n####\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            r3.display()
+            self.assertEqual(fake_out.getvalue(), expected_output)
+
+    def test_display_single_line(self):
+        """Test display for a single line rectangle"""
+        r4 = Rectangle(5, 1, 0, 3)
+        expected_output = "\n\n\n#####\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            r4.display()
+            self.assertEqual(fake_out.getvalue(), expected_output)
