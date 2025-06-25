@@ -120,3 +120,26 @@ class Rectangle(Base):
         for symbole in range(self.height):
             print(" " * self.x, end="")
             print("#" * self.width)
+
+    def update(self, *args):
+        if len(args) == 1:
+            self.id = args[0]
+        elif len(args) == 2:
+            self.id = args[0]  
+            self.width = args[1]
+        elif len(args) == 3:
+            self.id = args[0]  
+            self.width = args[1]
+            self.height = args[2]
+        elif len(args) == 4:
+            self.id = args[0]  
+            self.width = args[1]
+            self.height = args[2]
+            self.x = args[3]
+        elif len(args) == 5:
+            self.id = args[0]  
+            self.width = args[1]
+            self.height = args[2]
+            self.x = args[3]
+            self.y = args[4]
+
