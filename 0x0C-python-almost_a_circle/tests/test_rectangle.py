@@ -96,3 +96,10 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             r4.display()
             self.assertEqual(fake_out.getvalue(), expected_output)
+
+    def test_no_arguments_passed(self):
+        self.assertRaises(TypeError, Rectangle)
+
+    def test_update_one_argument(self):
+        rect = Rectangle(1,1)
+        rect.update()
