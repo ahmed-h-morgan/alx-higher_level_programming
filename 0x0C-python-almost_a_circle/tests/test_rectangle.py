@@ -100,6 +100,12 @@ class TestRectangle(unittest.TestCase):
     def test_no_arguments_passed(self):
         self.assertRaises(TypeError, Rectangle)
 
-    def test_update_one_argument(self):
+    def test_update_no_arguments(self):
         rect = Rectangle(1,1)
         rect.update()
+        self.assertEqual(rect.id, 1)
+
+    def test_update_one_argument(self):
+        rect = Rectangle(1,1)
+        rect.update(3)
+        self.assertEqual(rect.width, 3)
