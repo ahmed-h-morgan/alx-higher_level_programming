@@ -11,25 +11,15 @@ class TestSquare(unittest.TestCase):
     """
     Test Square class
     """
-    # def test_only_width(self):
-    #     self.assertRaises(TypeError, Square, 5)
-
     def test_positive_width(self):
         squ = Square(7)
         self.assertEqual(squ.width, 7)
-        # self.assertEqual(squ.height, 14)
 
     def test_negative_width(self):
         self.assertRaisesRegex(ValueError, "width must be > 0", Square, -3, 6)
 
-    # def test_negative_height(self):
-    #     self.assertRaisesRegex(ValueError, "height must be > 0", Square, 7, -5)
-
     def test_zero_width(self):
         self.assertRaisesRegex(ValueError, "width must be > 0", Square, 0, 10)
-
-    # def test_zero_height(self):
-    #     self.assertRaisesRegex(ValueError, "height must be > 0", Square, 15, 0)
 
     def test_negative_x(self):
         self.assertRaisesRegex(ValueError, "x must be >= 0", Square, 2, -4)
@@ -39,9 +29,6 @@ class TestSquare(unittest.TestCase):
 
     def test_string_width(self):
         self.assertRaisesRegex(TypeError, "width must be an integer", Square, "3", 6)
-
-    # def test_string_height(self):
-    #     self.assertRaisesRegex(TypeError, "height must be an integer", Square, 12, "16")
 
     def test_string_x(self):
         self.assertRaisesRegex(TypeError, "x must be an integer", Square, 12, "3")
@@ -55,11 +42,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(squ.x, 3)
         self.assertEqual(squ.y, 9)
         self.assertEqual(squ.id, 30)
-    
-    @unittest.skip("check if this is a required method in Square class or not")    
-    def test_area(self):
-        squ = Square(6, 7)
-        self.assertEqual(squ.area(), 42)
 
     def test_str(self):
         squ = Square(7, 3, 9,30)
@@ -109,3 +91,13 @@ class TestSquare(unittest.TestCase):
         squa = Square(1,1)
         squa.update(5)
         self.assertEqual(squa.id, 5)
+
+    def test_to_dictionary(self):
+        squa = Square(10, 2, 3, 1)
+        expected_dict = {
+            'id': 1,
+            'width': 10,
+            'x': 2,
+            'y': 3
+        }
+        self.assertEqual(squa.to_dictionary(), expected_dict)
