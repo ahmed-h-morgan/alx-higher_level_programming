@@ -17,6 +17,9 @@ class TestBase(unittest.TestCase):
         new_id = Base(25)
         self.assertEqual(new_id.id, 25)
 
+    def test_to_json_string(self):
+        pass
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
