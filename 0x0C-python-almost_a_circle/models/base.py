@@ -26,6 +26,10 @@ class Base:
 
         str_rep = json.dumps(list_dictionaries)
         return str_rep
+    
+    @staticmethod
+    def from_json_string(json_string):
+        pass
 
     @classmethod
     def save_to_file(cls, list_objs):
