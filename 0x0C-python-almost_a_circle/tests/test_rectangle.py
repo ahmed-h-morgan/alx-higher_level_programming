@@ -6,11 +6,20 @@ import unittest
 from models.rectangle import Rectangle
 from io import StringIO
 from unittest.mock import patch
+import os
+# from ..models.base import Base
 
 class TestRectangle(unittest.TestCase):
     """
     Test Rectangle class
     """
+    def tearDown(self):
+        """Delete created files after each test."""
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
+
     def test_only_width(self):
         self.assertRaises(TypeError, Rectangle, 5)
 
@@ -120,3 +129,25 @@ class TestRectangle(unittest.TestCase):
             'y': 3
         }
         self.assertEqual(rect.to_dictionary(), expected_dict)
+
+    def test_rectangle_save_none(self):
+        Base.save_to_file(None)
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_rectangle_save_empty_list(self):
+        Base.save_to_file([])
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_rectangle_save_valid_objects(self):
+        r1 = Rectangle(3, 4, id=42)
+        r2 = Rectangle(5, 6)
+        Rectangle.save_to_file([r1, r2])
+        
+        expected_json = (
+            '[{"id": 42, "width": 3, "height": 4, "x": 0, "y": 0}, '
+            '{"id": 1, "width": 5, "height": 6, "x": 0, "y": 0}]'
+        )
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), expected_json)

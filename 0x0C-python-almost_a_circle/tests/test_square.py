@@ -6,11 +6,20 @@ import unittest
 from models.square import Square
 from io import StringIO
 from unittest.mock import patch
+# from ..models.base import Base
+import os
 
 class TestSquare(unittest.TestCase):
     """
     Test Square class
     """
+    def tearDown(self):
+        """Delete created files after each test."""
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
+
     def test_positive_width(self):
         squ = Square(7)
         self.assertEqual(squ.width, 7)
@@ -101,3 +110,25 @@ class TestSquare(unittest.TestCase):
             'y': 3
         }
         self.assertEqual(squa.to_dictionary(), expected_dict)
+
+    def test_square_save_none(self):
+        Base.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_square_save_empty_list(self):
+        Base.save_to_file([])
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_square_save_valid_objects(self):
+        s1 = Square(3, id=42)
+        s2 = Square(5)
+        Square.save_to_file([s1, s2])
+        
+        expected_json = (
+            '[{"id": 42, "size": 3, "x": 0, "y": 0}, '
+            '{"id": 1, "sizw": 5, "x": 0, "y": 0}]'
+        )
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), expected_json)
