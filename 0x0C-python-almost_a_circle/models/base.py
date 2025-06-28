@@ -26,3 +26,12 @@ class Base:
 
         str_rep = json.dumps(list_dictionaries)
         return str_rep
+
+    def save_to_file(cls, list_objs):
+        """writes the JSON string representation of list_objs to a file
+
+        Args:
+            list_objs (list): a list of instances who inherits of Base
+        """
+        pass
+        
