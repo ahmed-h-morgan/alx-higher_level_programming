@@ -41,7 +41,6 @@ class Base:
             dict_list = []
             for object in list_objs:
                 dict_list.append(object.to_dictionary())
-            
+
             with open(f"{cls.__name__}.json", 'w') as file:
                 file.write(cls.to_json_string(dict_list))
-                
