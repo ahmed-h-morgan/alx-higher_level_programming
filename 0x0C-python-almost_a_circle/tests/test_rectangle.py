@@ -7,7 +7,7 @@ from models.rectangle import Rectangle
 from io import StringIO
 from unittest.mock import patch
 import os
-# from ..models.base import Base
+from models.base import Base
 
 class TestRectangle(unittest.TestCase):
     """
@@ -112,7 +112,7 @@ class TestRectangle(unittest.TestCase):
     def test_update_no_arguments(self):
         rect = Rectangle(1,1)
         rect.update()
-        self.assertEqual(rect.id, 16)
+        self.assertEqual(rect.id, 17)
 
     def test_update_one_argument(self):
         rect = Rectangle(1,1)

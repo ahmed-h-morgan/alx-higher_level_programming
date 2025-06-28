@@ -26,10 +26,14 @@ class Base:
 
         str_rep = json.dumps(list_dictionaries)
         return str_rep
-    
+
     @staticmethod
     def from_json_string(json_string):
-        pass
+        if json_string is None or len(json_string) == 0:
+            return "[]"
+
+        list_rep = json.loads(json_string)
+        return list_rep
 
     @classmethod
     def save_to_file(cls, list_objs):
