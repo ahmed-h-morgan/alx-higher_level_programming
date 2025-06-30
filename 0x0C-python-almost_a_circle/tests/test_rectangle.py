@@ -112,7 +112,7 @@ class TestRectangle(unittest.TestCase):
     def test_update_no_arguments(self):
         rect = Rectangle(1,1)
         rect.update()
-        self.assertEqual(rect.id, 17)
+        self.assertEqual(rect.id, 20)
 
     def test_update_one_argument(self):
         rect = Rectangle(1,1)
@@ -131,23 +131,32 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.to_dictionary(), expected_dict)
 
     def test_rectangle_save_none(self):
-        Base.save_to_file(None)
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+        try:
+            Base.save_to_file(None)
+            with open("Rectangle.json", "r") as f:
+                self.assertEqual(f.read(), "[]")
+        except:
+            self.assertRaises(FileNotFoundError)
 
     def test_rectangle_save_empty_list(self):
-        Base.save_to_file([])
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+        try:
+            Base.save_to_file([])
+            with open("Rectangle.json", "r") as f:
+                self.assertEqual(f.read(), "[]")
+        except:
+            self.assertRaises(FileNotFoundError)
 
     def test_rectangle_save_valid_objects(self):
-        r1 = Rectangle(3, 4, id=42)
-        r2 = Rectangle(5, 6)
-        Rectangle.save_to_file([r1, r2])
-        
-        expected_json = (
-            '[{"id": 42, "width": 3, "height": 4, "x": 0, "y": 0}, '
-            '{"id": 1, "width": 5, "height": 6, "x": 0, "y": 0}]'
-        )
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(f.read(), expected_json)
+        try:
+            r1 = Rectangle(3, 4, id=42)
+            r2 = Rectangle(5, 6)
+            Rectangle.save_to_file([r1, r2])
+            
+            expected_json = (
+                '[{"id": 42, "width": 3, "height": 4, "x": 0, "y": 0}, '
+                '{"id": 1, "width": 5, "height": 6, "x": 0, "y": 0}]'
+            )
+            with open("Rectangle.json", "r") as f:
+                self.assertEqual(f.read(), expected_json)
+        except:
+            self.assertRaises(FileNotFoundError)

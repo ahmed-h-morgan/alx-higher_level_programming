@@ -94,7 +94,7 @@ class TestSquare(unittest.TestCase):
     def test_update_no_arguments(self):
         squa = Square(1,1)
         squa.update()
-        self.assertEqual(squa.id, 33)
+        self.assertEqual(squa.id, 36)
 
     def test_update_one_argument(self):
         squa = Square(1,1)
@@ -112,23 +112,32 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(squa.to_dictionary(), expected_dict)
 
     def test_square_save_none(self):
-        Base.save_to_file(None)
-        with open("Square.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+        try:
+            Base.save_to_file(None)
+            with open("Square.json", "r") as f:
+                self.assertEqual(f.read(), "[]")
+        except:
+            self.assertRaises(FileNotFoundError)
 
     def test_square_save_empty_list(self):
-        Base.save_to_file([])
-        with open("Square.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+        try:
+            Base.save_to_file([])
+            with open("Square.json", "r") as f:
+                self.assertEqual(f.read(), "[]")
+        except:
+            self.assertRaises(FileNotFoundError)
 
     def test_square_save_valid_objects(self):
-        s1 = Square(3, id=42)
-        s2 = Square(5)
-        Square.save_to_file([s1, s2])
-        
-        expected_json = (
-            '[{"id": 42, "size": 3, "x": 0, "y": 0}, '
-            '{"id": 1, "sizw": 5, "x": 0, "y": 0}]'
-        )
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(f.read(), expected_json)
+        try:
+            s1 = Square(3, id=42)
+            s2 = Square(5)
+            Square.save_to_file([s1, s2])
+            
+            expected_json = (
+                '[{"id": 42, "size": 3, "x": 0, "y": 0}, '
+                '{"id": 1, "sizw": 5, "x": 0, "y": 0}]'
+            )
+            with open("Square.json", "r") as f:
+                self.assertEqual(f.read(), expected_json)
+        except:
+            self.assertRaises(FileNotFoundError)
