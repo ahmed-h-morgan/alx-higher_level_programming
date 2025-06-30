@@ -212,3 +212,60 @@ class TestSquare(unittest.TestCase):
         """Test that filename is correct"""
         Square.save_to_file([])
         self.assertTrue(os.path.exists("Square.json"))
+
+    def test_square_load_nonexistent_file(self):
+        """Test loading when Square.json doesn't exist"""
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+        result = Square.load_from_file()
+        self.assertEqual(result, [])
+
+    def test_square_load_empty_file(self):
+        """Test loading empty Square.json"""
+        with open("Square.json", 'w') as f:
+            f.write("[]")
+        result = Square.load_from_file()
+        self.assertEqual(result, [])
+
+    def test_square_load_one(self):
+        """Test loading one square"""
+        s = Square(5, 1, 2, 3)
+        Square.save_to_file([s])
+        loaded = Square.load_from_file()
+        
+        self.assertEqual(len(loaded), 1)
+        self.assertIsInstance(loaded[0], Square)
+        self.assertEqual(loaded[0].size, 5)
+        self.assertEqual(loaded[0].x, 1)
+        self.assertEqual(loaded[0].y, 2)
+        self.assertEqual(loaded[0].id, 3)
+
+    def test_square_load_multiple(self):
+        """Test loading multiple squares"""
+        s1 = Square(5, 1, 2, 3)
+        s2 = Square(7, 0, 0, 4)
+        Square.save_to_file([s1, s2])
+        loaded = Square.load_from_file()
+        
+        self.assertEqual(len(loaded), 2)
+        self.assertEqual(loaded[0].id, 3)
+        self.assertEqual(loaded[1].id, 4)
+
+    # Cross-class tests
+    # def test_separate_files_for_classes(self):
+    #     """Test that Rectangle and Square use separate files"""
+    #     r = Rectangle(1, 2)
+    #     s = Square(3)
+    #     Rectangle.save_to_file([r])
+    #     Square.save_to_file([s])
+        
+    #     self.assertTrue(os.path.exists("Rectangle.json"))
+    #     self.assertTrue(os.path.exists("Square.json"))
+        
+    #     rects = Rectangle.load_from_file()
+    #     squares = Square.load_from_file()
+        
+    #     self.assertEqual(len(rects), 1)
+    #     self.assertEqual(len(squares), 1)
+    #     self.assertIsInstance(rects[0], Rectangle)
+    #     self.assertIsInstance(squares[0], Square)

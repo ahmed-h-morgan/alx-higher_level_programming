@@ -232,3 +232,43 @@ class TestRectangle(unittest.TestCase):
         """Test that filename is correct"""
         Rectangle.save_to_file([])
         self.assertTrue(os.path.exists("Rectangle.json"))
+
+
+    def test_rectangle_load_nonexistent_file(self):
+        """Test loading when Rectangle.json doesn't exist"""
+        if os.path.exists("Rectangle.json"):
+            os.remove("Rectangle.json")
+        result = Rectangle.load_from_file()
+        self.assertEqual(result, [])
+
+    def test_rectangle_load_empty_file(self):
+        """Test loading empty Rectangle.json"""
+        with open("Rectangle.json", 'w') as f:
+            f.write("[]")
+        result = Rectangle.load_from_file()
+        self.assertEqual(result, [])
+
+    def test_rectangle_load_one(self):
+        """Test loading one rectangle"""
+        r = Rectangle(10, 7, 2, 8, 1)
+        Rectangle.save_to_file([r])
+        loaded = Rectangle.load_from_file()
+        
+        self.assertEqual(len(loaded), 1)
+        self.assertIsInstance(loaded[0], Rectangle)
+        self.assertEqual(loaded[0].width, 10)
+        self.assertEqual(loaded[0].height, 7)
+        self.assertEqual(loaded[0].x, 2)
+        self.assertEqual(loaded[0].y, 8)
+        self.assertEqual(loaded[0].id, 1)
+
+    def test_rectangle_load_multiple(self):
+        """Test loading multiple rectangles"""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        Rectangle.save_to_file([r1, r2])
+        loaded = Rectangle.load_from_file()
+        
+        self.assertEqual(len(loaded), 2)
+        self.assertEqual(loaded[0].id, 1)
+        self.assertEqual(loaded[1].id, 2)
