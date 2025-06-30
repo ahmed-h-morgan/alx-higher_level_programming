@@ -169,3 +169,66 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(new_rect.height, 12)
         self.assertEqual(new_rect.x, 3)
         self.assertEqual(new_rect.y, 2)
+
+
+    def test_save_empty_list(self):
+        """Test saving an empty list"""
+        Rectangle.save_to_file([])
+        self.assertTrue(os.path.exists("Rectangle.json"))
+        with open("Rectangle.json", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_none(self):
+        """Test saving None"""
+        Rectangle.save_to_file(None)
+        self.assertTrue(os.path.exists("Rectangle.json"))
+        with open("Rectangle.json", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_one_rectangle(self):
+        """Test saving one rectangle"""
+        r = Rectangle(10, 7, 2, 8, 1)
+        Rectangle.save_to_file([r])
+        self.assertTrue(os.path.exists("Rectangle.json"))
+        
+        expected = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]'
+        with open("Rectangle.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_two_rectangles(self):
+        """Test saving two rectangles"""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        Rectangle.save_to_file([r1, r2])
+        self.assertTrue(os.path.exists("Rectangle.json"))
+        
+        expected = (
+            '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}, '
+            '{"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
+        )
+        with open("Rectangle.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_file_overwrite(self):
+        """Test that existing file is overwritten"""
+        # First save
+        r1 = Rectangle(1, 1, 0, 0, 1)
+        Rectangle.save_to_file([r1])
+        
+        # Second save with different data
+        r2 = Rectangle(2, 2, 0, 0, 2)
+        Rectangle.save_to_file([r2])
+        
+        expected = '[{"id": 2, "width": 2, "height": 2, "x": 0, "y": 0}]'
+        with open("Rectangle.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_invalid_object(self):
+        """Test saving invalid objects (should raise AttributeError)"""
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file([1, 2, 3])
+
+    def test_filename_correct(self):
+        """Test that filename is correct"""
+        Rectangle.save_to_file([])
+        self.assertTrue(os.path.exists("Rectangle.json"))
