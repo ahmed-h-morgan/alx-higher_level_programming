@@ -94,7 +94,7 @@ class TestSquare(unittest.TestCase):
     def test_update_no_arguments(self):
         squa = Square(1,1)
         squa.update()
-        self.assertEqual(squa.id, 36)
+        self.assertEqual(squa.id, 39)
 
     def test_update_one_argument(self):
         squa = Square(1,1)

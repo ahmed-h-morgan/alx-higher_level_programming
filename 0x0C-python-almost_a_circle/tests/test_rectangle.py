@@ -112,7 +112,7 @@ class TestRectangle(unittest.TestCase):
     def test_update_no_arguments(self):
         rect = Rectangle(1,1)
         rect.update()
-        self.assertEqual(rect.id, 20)
+        self.assertEqual(rect.id, 23)
 
     def test_update_one_argument(self):
         rect = Rectangle(1,1)
