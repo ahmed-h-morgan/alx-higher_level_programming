@@ -149,3 +149,66 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(new_square.size, 5)
         self.assertEqual(new_square.x, 3)
         self.assertEqual(new_square.y, 2)
+
+
+    def test_save_empty_list(self):
+        """Test saving an empty list"""
+        Square.save_to_file([])
+        self.assertTrue(os.path.exists("Square.json"))
+        with open("Square.json", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_none(self):
+        """Test saving None"""
+        Square.save_to_file(None)
+        self.assertTrue(os.path.exists("Square.json"))
+        with open("Square.json", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_one_square(self):
+        """Test saving one rectangle"""
+        s = Square(10, 2, 8, 1)
+        Square.save_to_file([s])
+        self.assertTrue(os.path.exists("Square.json"))
+        
+        expected = '[{"id": 1, "width": 10, "x": 2, "y": 8}]'
+        with open("Square.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_two_squares(self):
+        """Test saving two rectangles"""
+        s1 = Square(10, 2, 8, 1)
+        s2 = Square(2, 0, 0, 2)
+        Square.save_to_file([s1, s2])
+        self.assertTrue(os.path.exists("Square.json"))
+        
+        expected = (
+            '[{"id": 1, "width": 10, "x": 2, "y": 8}, '
+            '{"id": 2, "width": 2, "x": 0, "y": 0}]'
+        )
+        with open("Square.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_file_overwrite(self):
+        """Test that existing file is overwritten"""
+        # First save
+        s1 = Square(1, 0, 0, 1)
+        Square.save_to_file([s1])
+        
+        # Second save with different data
+        s2 = Square(2, 0, 0, 2)
+        Square.save_to_file([s2])
+        
+        expected = '[{"id": 2, "width": 2, "x": 0, "y": 0}]'
+        with open("Square.json", 'r') as f:
+            self.assertEqual(f.read(), expected)
+
+    def test_save_invalid_object(self):
+        """Test saving invalid objects (should raise AttributeError)"""
+        with self.assertRaises(AttributeError):
+            Square.save_to_file([1, 2, 3])
+
+    def test_filename_correct(self):
+        """Test that filename is correct"""
+        Square.save_to_file([])
+        self.assertTrue(os.path.exists("Square.json"))
