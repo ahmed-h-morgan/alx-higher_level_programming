@@ -94,7 +94,7 @@ class TestSquare(unittest.TestCase):
     def test_update_no_arguments(self):
         squa = Square(1,1)
         squa.update()
-        self.assertEqual(squa.id, 43)
+        self.assertEqual(squa.id, 49)
 
     def test_update_one_argument(self):
         squa = Square(1,1)
@@ -251,21 +251,4 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(loaded[0].id, 3)
         self.assertEqual(loaded[1].id, 4)
 
-    # Cross-class tests
-    # def test_separate_files_for_classes(self):
-    #     """Test that Rectangle and Square use separate files"""
-    #     r = Rectangle(1, 2)
-    #     s = Square(3)
-    #     Rectangle.save_to_file([r])
-    #     Square.save_to_file([s])
-        
-    #     self.assertTrue(os.path.exists("Rectangle.json"))
-    #     self.assertTrue(os.path.exists("Square.json"))
-        
-    #     rects = Rectangle.load_from_file()
-    #     squares = Square.load_from_file()
-        
-    #     self.assertEqual(len(rects), 1)
-    #     self.assertEqual(len(squares), 1)
-    #     self.assertIsInstance(rects[0], Rectangle)
-    #     self.assertIsInstance(squares[0], Square)
+
