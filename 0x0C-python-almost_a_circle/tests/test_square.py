@@ -94,7 +94,7 @@ class TestSquare(unittest.TestCase):
     def test_update_no_arguments(self):
         squa = Square(1,1)
         squa.update()
-        self.assertEqual(squa.id, 41)
+        self.assertEqual(squa.id, 43)
 
     def test_update_one_argument(self):
         squa = Square(1,1)
@@ -141,3 +141,11 @@ class TestSquare(unittest.TestCase):
                 self.assertEqual(f.read(), expected_json)
         except:
             self.assertRaises(FileNotFoundError)
+
+    def test_create_square(self):
+        sqaure = Square(1)
+        new_square = sqaure.create(**{ 'id': 89, 'size': 5, 'x': 3, 'y': 2 })
+        self.assertEqual(new_square.id, 89)
+        self.assertEqual(new_square.size, 5)
+        self.assertEqual(new_square.x, 3)
+        self.assertEqual(new_square.y, 2)
