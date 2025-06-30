@@ -4,6 +4,7 @@
 """
 import json
 import os
+import csv
 
 
 class Base:
@@ -84,4 +85,69 @@ class Base:
 
         list_of_dict = cls.from_json_string(json_string)
         instances = [cls.create(**dic) for dic in list_of_dict]
+        return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serializes objects to CSV file."""
+        if not list_objs:
+            with open(f"{cls.__name__}.csv", "w") as file:
+                file.write("[]")
+            return
+
+        # Determine CSV headers based on class
+        if cls.__name__ == "Rectangle":
+            attrs = ["id", "width", "height", "x", "y"]
+        elif cls.__name__ == "Square":
+            attrs = ["id", "size", "x", "y"]
+    
+        # Write each object as a CSV line
+        with open(f"{cls.__name__}.csv", "w") as file:
+            for obj in list_objs:
+                # Get attributes in order (e.g., obj.id, obj.width, etc.)
+                csv_line = ",".join(str(getattr(obj, attr)) for attr in attrs)
+                file.write(csv_line + "\n")
+
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserializes objects from a CSV file.
+        
+        Returns:
+            list: A list of Rectangle or Square instances loaded from the CSV file.
+            Returns an empty list if the file doesn't exist.
+        """
+        filename = cls.__name__ + ".csv"
+        
+        if not os.path.exists(filename):
+            return []
+        
+        instances = []
+        
+        with open(filename, mode='r') as file:
+            csv_reader = csv.reader(file)
+            
+            for row in csv_reader:
+                if not row:  # Skip empty lines
+                    continue
+                    
+                try:
+                    # Convert all values to integers
+                    values = [int(value) for value in row]
+                    
+                    if cls.__name__ == "Rectangle":
+                        if len(values) == 5:
+                            # id, width, height, x, y
+                            instance = cls(values[1], values[2], values[3], values[4], values[0])
+                            instances.append(instance)
+                    elif cls.__name__ == "Square":
+                        if len(values) == 4:
+                            # id, size, x, y
+                            instance = cls(values[1], values[2], values[3], values[0])
+                            instances.append(instance)
+                            
+                except (ValueError, IndexError):
+                    # Skip rows with invalid data
+                    continue
+                    
         return instances
